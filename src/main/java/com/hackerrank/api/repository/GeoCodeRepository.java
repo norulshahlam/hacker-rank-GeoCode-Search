@@ -44,7 +44,8 @@ public class GeoCodeRepository {
     public List<GeoCode> findAll() {
         Set<String> stringSet = redisTemplate.keys("*_*");
         List<GeoCode> geoCodeArrayList = new ArrayList<>();
-        if (stringSet == null || stringSet.isEmpty()) return geoCodeArrayList;
+        if (stringSet.isEmpty() || stringSet == null)
+            return geoCodeArrayList;
         for (String key : stringSet) {
             Object val = redisTemplate.opsForValue().get(key);
             if (val instanceof GeoCode) {
